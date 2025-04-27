@@ -7,4 +7,4 @@ from app.config.routes import registrar_rutas
 app=create_app(Config)
 
 if __name__=='__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0',debug=True)
