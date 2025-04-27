@@ -11,8 +11,8 @@ class Producto(db.Model):
     ingrediente2=db.Column(db.Integer, db.ForeignKey('ingrediente.id'), nullable=False)
     ingrediente3=db.Column(db.Integer, db.ForeignKey('ingrediente.id'), nullable=False)
     precio_publico=db.Column(db.Float,nullable=False)
-    tipo_vaso=db.Column(db.String(50), nullable=False)
-    volumen=db.Column(db.Float,nullable=False)
+    tipo_vaso=db.Column(db.String(50), nullable=True)
+    volumen=db.Column(db.Float,nullable=True)
     imagen=db.Column(db.String(500), nullable=False)
     
     def to_dict(self):

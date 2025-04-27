@@ -12,7 +12,7 @@ class Ingrediente(db.Model):
     existencia=db.Column(db.Float,nullable=False)
     es_vegetariano=db.Column(db.Boolean,nullable=False)
     tipo=db.Column(db.String(45), nullable=False)
-    sabor=db.Column(db.String(100), nullable=False)
+    sabor=db.Column(db.String(100), nullable=True)
     
     def __init__(self,nombre:str, calorias: int, precio: int, existencia: float,es_vegetariano: bool, tipo: str,sabor: str):
         self.nombre=nombre
