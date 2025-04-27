@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Heladería</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container d-flex justify-content-center align-items-center" style="height: 80vh;">
+        <div class="card p-4 shadow-lg" style="width: 24rem;">
+            <h2 class="text-center mb-4"  style="color: #0b3fb1;">Heladeria Banana Sweet</h1>
+            <h3 class="text-center mb-4"  style="color: #687481;">Iniciar Sesión</h1>
+            <form action="{{ url_for('parlor.login') }}" method="POST">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Usuario:</label>
+                    <input type="text" id="username" name="username" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Contraseña:</label>
+                    <input type="password" id="password" name="password" class="form-control" required>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Ingresar</button>
+                </div>
+                <br>
+                {% with messages=get_flashed_messages()%}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-danger" role="alert">
+                                <p>{{message}}</p>
+                            </div>
+                        {% endfor%}
+                    {% endif %}
+                {%endwith%}
+            </form>
+            <br>
+            <p class="text-center"><a class="link-opacity-50-hover" href="{{ url_for('parlor.index') }}">Ir a Página de Inicio</a></p>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!--  
+        Script JS opcional para hacer desaparecer los mensajes flash despues de 3 segundos
+    -->
+    <script>
+        // static/js/flash.js
+        document.addEventListener('DOMContentLoaded', function () {
+        setTimeout(function () {
+            let alerts = document.querySelectorAll('.alert')
+            alerts.forEach(function (alert) {
+            alert.style.opacity = '0'
+            setTimeout(function () {
+                alert.remove()
+            }, 50)
+            })
+        }, 8000)
+        })
+    </script>
+</body>
+</html>

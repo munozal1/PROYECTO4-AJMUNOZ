@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Home</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    </head>
+    <body>        
+        <center>
+        <div class="container d-flex justify-content-center align-items-center">
+            <div class="card p-4 shadow-lg" style="width: 96rem;">
+            <div class="container">
+                <div class="col-8" style="color: #0b3fb1;">
+                    <h2>Heladeria Banana Sweet</h2>
+                </div>
+                <div class="row">    
+                    {% for producto in productos %}
+                        <div class="col-lg-3 mb-5">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <img src="{{ url_for('static', filename=producto.imagen) }}"  alt="{{ producto.nombreProducto }}" class="img-fluid text-center" width="300" height="300">
+                            </div>
+                            <h5 class="py-2 rounded-top">{{ producto.nombreProducto }}</h5>
+                        </div>
+                    {% endfor %}
+                </div>
+                {% if current_user.is_authenticated %}
+                    <h5 class="py-2 rounded-top">Bienvenido, {{ current_user.username }}! </h5>
+                    <div class="card col-4">
+                        <div class="card-header">
+                        Menú Principal
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-hover">
+                                <tr>
+                                    <td><a href="/ventas">Registrar venta</a></td>
+                                </tr>
+                                {% if current_user.es_admin %}
+                                    <tr>
+                                        <td>
+                                            <a href="/masrentable">Producto más rentable</a>
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                                <tr>
+                                    <td><a href="/abastecerbase">Abastecer base</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="/abastecercomplemento">Abastecer complemento</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="/essano">Ingrediente es sano?</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="/calorias">Calcular calorias</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="/logout">Cerrar Sesión</a></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div> 
+                    <br>
+                {%else%}
+                    <h5 class="py-2 rounded-top">Bienvenido, Sr. Cliente! </h5>
+                    <div class="card col-4">
+                        <div class="card-header">
+                        Menú Principal
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-hover">
+                                <tr>
+                                    <td><a href="/ventas">Registrar venta</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="/calorias">Calcular calorias</a></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div> 
+                    <br>    
+                    <a href="{{ url_for('parlor.login') }}">Iniciar Sesión</a>
+                {% endif %}
+                <br>    
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-6">
+                            {% with messages=get_flashed_messages(with_categories=True)%}
+                                {% if messages %}
+                                    {% for category, message in messages %}
+                                        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                                            {{ message }}
+                                        </div>
+                                    {% endfor%}
+                                {% endif %}
+                            {%endwith%}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        </center>
+    <!-- Bootstrap JS Opcional -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-2xjAWviLddX9YMeAuUE60c3t+hckx2WgUz9o0Mi27Fr7X1s1ghcXFDx72yUIWQGs" crossorigin="anonymous"></script>
+    <!--  
+    Script JS opcional para hacer desaparecer los mensajes flash despues de 3 segundos
+        -->
+    <script>
+        // static/js/flash.js
+        document.addEventListener('DOMContentLoaded', function () {
+        setTimeout(function () {
+            let alerts = document.querySelectorAll('.alert')
+            alerts.forEach(function (alert) {
+            alert.style.opacity = '0'
+            setTimeout(function () {
+                alert.remove()
+            }, 50)
+            })
+        }, 8000)
+        })
+    </script>
+    </body>
+</html>
