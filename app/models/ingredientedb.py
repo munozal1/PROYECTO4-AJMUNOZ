@@ -14,14 +14,14 @@ class Ingrediente(db.Model):
     tipo=db.Column(db.String(45), nullable=False)
     sabor=db.Column(db.String(100), nullable=True)
     
-    def __init__(self,nombre:str, calorias: int, precio: int, existencia: float,es_vegetariano: bool, tipo: str,sabor: str):
-        self.nombre=nombre
-        self.calorias=calorias
-        self.precio=precio
-        self.existencia=existencia
-        self.es_vegetariano=es_vegetariano
-        self.tipo=tipo
-        self.sabor=sabor
+    # def __init__(self,nombre:str, calorias: int, precio: int, existencia: float,es_vegetariano: bool, tipo: str,sabor: str):
+    #     self.nombre=nombre
+    #     self.calorias=calorias
+    #     self.precio=precio
+    #     self.existencia=existencia
+    #     self.es_vegetariano=es_vegetariano
+    #     self.tipo=tipo
+    #     self.sabor=sabor
         
     
     def es_sano(vcalorias:int,vvegetariano:bool):
